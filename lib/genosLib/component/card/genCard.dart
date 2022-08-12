@@ -225,6 +225,7 @@ class GenCardOrder extends StatelessWidget {
   final Function()? ontap;
   final String? badges;
 
+
   GenCardOrder({
     this.ontap,
     this.nomor = "-",
@@ -237,7 +238,7 @@ class GenCardOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GenCard(
-        ontap: ontap ?? () {},
+
         width: double.infinity,
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(
@@ -270,28 +271,40 @@ class GenCardOrder extends StatelessWidget {
                           Container(
                             width: double.infinity,
                           ),
-                          GenText(
-                              nomor == null
-                                  ? "No. Trans : -"
-                                  : "No. Trans : " + nomor,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15)),
-                          SizedBox(
-                            width: 5,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GenText(
+                                      nomor == null
+                                          ? "No. Trans : -"
+                                          : "No. Trans : " + nomor,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold, fontSize: 15)),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  GenText(
+                                      tanggal == null
+                                          ? "Tanggal: -"
+                                          : "Tanggal: " +
+                                              formatTanggalFromString(tanggal!),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold, fontSize: 15)),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  GenText("Status :" + status.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold, fontSize: 15)),
+                                ],
+                              ),
+                              status == "dikirim" ? ElevatedButton(onPressed: ontap ?? () {},
+                              child: GenText("Terima"),) : Container()
+                            ],
                           ),
-                          GenText(
-                              tanggal == null
-                                  ? "Tanggal: -"
-                                  : "Tanggal: " +
-                                      formatTanggalFromString(tanggal!),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15)),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          GenText("Status :" + status.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15)),
                           SizedBox(
                             width: 5,
                           ),

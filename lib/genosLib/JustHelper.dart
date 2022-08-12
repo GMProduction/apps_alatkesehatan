@@ -28,9 +28,11 @@ String statusTrans(stat){
   if(stat == 0){
     return "Menunggu";
   }else if(stat == 1){
-    return "di Terima";
+    return "dikirim";
+  }else if(stat == 2){
+    return "diterima";
   }else{
-    return "di Tolak";
+    return "ditolak";
   }
 
 }

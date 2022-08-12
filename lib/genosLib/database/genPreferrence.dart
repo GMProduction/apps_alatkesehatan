@@ -13,6 +13,18 @@ Future getPrefferenceToken() async {
   return token;
 }
 
+Future setPrefferenceIP(String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('ipalokon', value);
+}
+
+Future getPrefferenceIP() async {
+  String? token;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  token = prefs.getString('ipalokon');
+  return token;
+}
+
 //AVATAR
 Future setPrefferenceAvatar(String value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -5,21 +5,12 @@ import 'database/genPreferrence.dart';
 
 
 
-String ip = "http://192.168.137.1:8000";
+String ip = "http://192.168.43.65:8000";
 
-
-getIp() {
-  return ip;
-}
-
-convertUrlAsset(img) {
-  return img == null
-      ? null
-      : (img.indexOf("http") >= 0 ? "$img" : getIp() + "$img");
-}
 
 Future postLogin(String token, String fcm, String deviceId, String deviceModel,
     String provider) async {
+  ip = await getPrefferenceIP();
   try {
     String path = "$ip/api-login";
     Response response = await Dio().post(path, data: {
@@ -46,6 +37,7 @@ Future postLoginEmail(
     String deviceModel,
     String provider,
     bool socialVerify) async {
+  ip = await getPrefferenceIP();
   try {
     String path = "$ip/api-login";
     Response response = await Dio().post(path, data: {
@@ -75,6 +67,7 @@ Future postLoginEmailTrue(
     String deviceModel,
     String provider,
     bool socialVerify) async {
+  ip = await getPrefferenceIP();
   try {
     String path = "$ip/api-login";
     Response response = await Dio().post(path, data: {
@@ -96,6 +89,7 @@ Future postLoginEmailTrue(
 }
 
 dynamic get(portal) async {
+  ip = await getPrefferenceIP();
   try {
     var token = await getPrefferenceToken();
     Response response = await Dio().get(ip + "/" + portal,
@@ -108,6 +102,9 @@ dynamic get(portal) async {
 
 class GenRequest {
   getApi(portal) async {
+    ip = await getPrefferenceIP();
+
+    print("IP nya :"+ip);
     try {
       var token = await getPrefferenceToken();
       Response response;
@@ -126,6 +123,7 @@ class GenRequest {
   }
 
   getApiPublic(portal) async {
+    ip = await getPrefferenceIP();
     try {
       Response response = await Dio().get(ip + "/api/" + portal);
       return response.data;
@@ -136,6 +134,7 @@ class GenRequest {
   }
 
   postForm(portal, data) async {
+    ip = await getPrefferenceIP();
     try {
       var token = await getPrefferenceToken();
       String path = "$ip/api/$portal";
@@ -157,6 +156,7 @@ class GenRequest {
   }
 
   postFormWoAuth(portal, data) async {
+    ip = await getPrefferenceIP();
     print("data" +data.toString());
 
     try {
@@ -178,6 +178,7 @@ class GenRequest {
   }
 
   postRegisterForm(portal, data) async {
+    ip = await getPrefferenceIP();
     try {
       String path = "$ip/api/$portal";
       print(path);
@@ -196,6 +197,7 @@ class GenRequest {
     }
   }
   postFormWoApi(portal, data) async {
+    ip = await getPrefferenceIP();
     try {
       var token = await getPrefferenceToken();
       String path = "$ip/$portal";
@@ -212,6 +214,7 @@ class GenRequest {
   }
 
   postApiAuth(portal, data) async {
+    ip = await getPrefferenceIP();
     Dio dio = Dio();
     var token = await getPrefferenceToken();
 
@@ -244,6 +247,7 @@ class GenRequest {
   }
 
   postApi(portal, Map<dynamic, dynamic> data) async {
+    ip = await getPrefferenceIP();
     var token = await getPrefferenceToken();
 
     try {
@@ -272,6 +276,7 @@ class GenRequest {
   }
 
   getApiUsingParams(portal, params) async {
+    ip = await getPrefferenceIP();
     try {
       var token = await getPrefferenceToken();
 
@@ -287,6 +292,7 @@ class GenRequest {
   }
 
   deleteApi(portal) async {
+    ip = await getPrefferenceIP();
     var token = await getPrefferenceToken();
 
     try {

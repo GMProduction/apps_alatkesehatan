@@ -66,9 +66,9 @@ class _WelcomePageState extends State<WelcomePage> {
       // ),
       pages: [
         PageViewModel(
-          title: "Order Alat Kesehatan",
+          title: "Alokon",
           body:
-          "Order Alat Kesehatan langsung dari aplikasi aja, nanti barang dikirim",
+          "Order Alokon langsung dari aplikasi aja, nanti barang dikirim",
           image: _buildImage('images/order.png'),
           decoration: pageDecoration,
         ),

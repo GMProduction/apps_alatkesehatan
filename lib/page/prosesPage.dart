@@ -12,6 +12,7 @@ import '../genosLib/component/etc/genShadow.dart';
 import '../genosLib/component/page/genPage.dart';
 import '../genosLib/genColor.dart';
 import '../genosLib/genText.dart';
+import '../genosLib/genToast.dart';
 import '../genosLib/request.dart';
 import 'menuNavbar.dart';
 
@@ -25,7 +26,7 @@ class ProsesPage extends StatefulWidget {
 class _ProsesPageState extends State<ProsesPage> {
   final req = new GenRequest();
   List? dataTransaksi;
-
+  bool readytoHit = true;
   int _currentIndex = 0;
 
   @override
@@ -112,7 +113,8 @@ class _ProsesPageState extends State<ProsesPage> {
                             tanggal: e["tanggal"],
                             status: statusTrans(e["status"]),
                             ontap: () {
-                              Navigator.pushNamed(context, "detail");
+                              print("diterima");
+                              TerimaBarang(e["id"].toString());
                             },
                           );
                         }).toList()),
@@ -145,5 +147,27 @@ class _ProsesPageState extends State<ProsesPage> {
     var logger = Logger();
     logger.i("DATA LOG " + dataTransaksi![0]["keranjang"].toString());
     setState(() {});
+  }
+
+  void TerimaBarang(transId) async {
+    setState(() {
+      readytoHit = false;
+    });
+
+      var dataTerima;
+    dataTerima = await req.postApi("transaction/"+transId+"/terima", {"barang_id": transId});
+      if(dataTerima == "berhasil"){
+        toastShow("barang berhasil diterima ", context, Colors.black);
+        setState(() {
+          readytoHit = true;
+        });
+      }else{
+        toastShow("Terjadi Kesalahan Server", context, Colors.black);
+        setState(() {
+          readytoHit = true;
+        });
+
+      print("DATA $dataTerima");
+    }
   }
 }
